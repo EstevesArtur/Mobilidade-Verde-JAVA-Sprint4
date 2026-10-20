@@ -42,7 +42,7 @@ public class ConexaoOracle {
 
     private static final String USUARIO_PADRAO = "RM569450";
 
-    private static final String SENHA_PADRAO = "21012006";
+    private static final String SENHA_PADRAO = "210106";
 
     /** Classe utilitaria: nao deve ser instanciada. */
     private ConexaoOracle() {
