@@ -1,0 +1,33 @@
+# ============================================================
+# Deploy no Render - Mobilidade Verde API
+# Challenge SoulUp 2026 - Sprint 4 - Equipe FOG - 1TDSPX-2026
+# ------------------------------------------------------------
+# O Render nao tem runtime Java nativo, entao o servico roda como
+# container Docker, construido pelo Dockerfile que esta nesta
+# mesma pasta.
+#
+# Este arquivo serve para criar o servico pelo recurso Blueprint.
+# Tambem e possivel criar o Web Service manualmente pelo painel,
+# escolhendo Language = Docker e deixando os campos de caminho no
+# valor padrao.
+#
+# As credenciais NAO sao definidas aqui: "sync: false" faz o
+# Render perguntar o valor na hora de criar o servico, para que
+# nada sensivel fique gravado no repositorio.
+# ============================================================
+services:
+  - type: web
+    name: mobilidade-verde-api
+    runtime: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/status
+    envVars:
+      - key: ORACLE_URL
+        value: jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL
+      - key: ORACLE_USER
+        sync: false
+      - key: ORACLE_PASSWORD
+        sync: false
