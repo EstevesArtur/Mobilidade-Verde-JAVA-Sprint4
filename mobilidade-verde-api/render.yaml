@@ -1,0 +1,30 @@
+# ============================================================
+# Deploy no Render - Mobilidade Verde API
+# Challenge SoulUp 2026 - Sprint 4 - Equipe FOG
+# ------------------------------------------------------------
+# Este arquivo permite criar o servico pelo recurso Blueprint do
+# Render. Tambem e possivel criar o Web Service manualmente pelo
+# painel, usando os mesmos comandos de build e de start.
+#
+# As credenciais do banco NAO ficam aqui: sao cadastradas no
+# painel do Render, em Environment, para que nao sejam expostas
+# no repositorio publico.
+# ============================================================
+services:
+  - type: web
+    name: mobilidade-verde-api
+    runtime: java
+    plan: free
+    region: oregon
+    buildCommand: ./mvnw clean package -DskipTests
+    startCommand: java -jar target/mobilidade-verde-api-1.0.0.jar
+    healthCheckPath: /api/status
+    envVars:
+      - key: JAVA_VERSION
+        value: "17"
+      - key: ORACLE_URL
+        value: jdbc:oracle:thin:@oracle.fiap.com.br:1521:ORCL
+      - key: ORACLE_USER
+        sync: false
+      - key: ORACLE_PASSWORD
+        sync: false
